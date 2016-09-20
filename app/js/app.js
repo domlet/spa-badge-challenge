@@ -1,22 +1,27 @@
-$.ready(function(){
+$(document).ready(function(){
   getBoots();
   getBadges();
+  console.log("js working")
 });
 
 var getBoots = function() {
+  console.log("getBoots working")
   var request = $.ajax({
-    url: '/boots',
+    url: 'http://localhost:3000/boots',
     type: 'GET'
   });
   request.done(function(response) {
+    console.log(response)
     renderHandlebars(JSON.parse(response));
   });
   request.fail(function(response) {
     console.log("Sad face, AJAX failure.")
+    console.log(response)
   });
 }
 
 var getBadges = function() {
+  console.log("getBadges working")
   var request = $.ajax({
     url: '/boots/:id',
     type: 'GET'
@@ -26,10 +31,12 @@ var getBadges = function() {
   });
   request.fail(function(response) {
     console.log("Sad face, AJAX failure.")
+    console.log(response)
   });
 }
 
 var renderHandlebars = $(function(bootObjects) {
+  console.log("renderHandlebars working")
   // Grab the template script
   var theTemplateScript = $("#boots-template").html();
   // Compile the template

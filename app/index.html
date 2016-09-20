@@ -6,29 +6,27 @@
 <body>
   <div class="container">
 
-    <!--This is our template. -->
-    <!--Data will be inserted in its according place, replacing the brackets.-->
+    <script id="boots-template" type="text/x-handlebars-template">
 
-    <script id="address-template" type="text/x-handlebars-template">
-    <h2>
-    {{#people}}
-      <p>{{name}}</p>
-        {{#badges}}
-        <p>{{badge_name}} - {{vote_count}}</p>
-      {{/badges}}
-    {{/people}}
-    </h2>
+    {{#boots}}
+        <h2>{{name}}</h2>
+    {{/boots}}
     </script>
 
-    <!--Your new content will be displayed in here-->
-    <div class="content-placeholder"></div>
-
+<!--
+{{#badges}}
+<p>{{badge_name}} - {{vote_count}}</p>
+{{/badges}}
+ -->
 
     <div class="logo">
       <h1> SPA Badge </h1>
     </div>
+    <h1> SF Boots </h1>
 
-    <h1> SF Teachers </h1>
+    <!--Your new content will be displayed in here-->
+    <div class="boots-placeholder"></div>
+    <div class="badges-placeholder"></div>
 
     <ul>
       <li><a href="#">Walker</a></li>

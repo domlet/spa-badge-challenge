@@ -1,6 +1,5 @@
 $(document).ready(function(){
   getBoots();
-  getBadges();
   nameListener();
   console.log("js working")
 });
@@ -11,21 +10,15 @@ $(document).ready(function(){
 // SO CLOSE!!
 var nameListener = function() {
   console.log("hi");
-  $('.boots-placeholder').click('a', function(event) {
-    console.log("hi again");
-    event.preventDefault();
+  $('.boots-placeholder').on('click', 'a', function(event) {
+    event.preventDefault()
+    var id = parseInt(this.id);
+    getBadges(id);
+    console.log(id);
+    console.log(this)
+
   })
 }
-
-// var nameListener = function() {
-//   $('.name-link').on('click',function(event){
-//     event.preventDefault();
-//     var id = parseInt(this.id);
-//     console.log(this);
-//     getBadges(id);
-//     console.log(id);
-//   })
-// }
 
 var getBoots = function() {
   console.log("getBoots working")
@@ -37,55 +30,79 @@ var getBoots = function() {
   request.done(function(response) {
     console.log("in getBoots")
     console.log(response)
-    renderHandlebars(response);
+    renderHandlebarsBoots(response);
   });
   request.fail(function(response) {
-    console.log("Sad face, AJAX failure.")
-    console.log(response)
+    console.log("AJAX failure.")
   });
 }
 
-var getBadges = function() {
+var getBadges = function(id) {
   console.log("in getBadges")
-  // console.log(id)
+  console.log(id)
   var request = $.ajax({
-    // url: '/boots/' + id,
+    url: 'http://localhost:3000/boots/' + id,
     type: 'GET'
   });
   request.done(function(response) {
-    renderHandlebars(response);
+    renderHandlebarsBadges(response);
+    console.log(response)
+    console.log("handlebars.js")
   });
   request.fail(function(response) {
-    console.log("Sad face, AJAX failure.")
+    console.log("AJAX failure.")
     console.log("getBadges")
-    console.log(response)
   });
 }
 
-var renderHandlebars = function() {
-  $(function(bootObjects) {
-    console.log("renderHandlebars working")
+var renderHandlebarsBoots = function(bootObjects) {
+    console.log("renderHandlebarsBoots working")
+    console.log(bootObjects)
   // Grab the template script
   var theTemplateScript = $("#boots-template").html();
   // Compile the template
   var theTemplate = Handlebars.compile(theTemplateScript);
   // Define our data object
   var boots = []
-  var context =
-  {
-    boots: [
-    {id: "1", name: "Seba", badges: [ { badge_name: "Most Chilean", vote_count: "30", person_id: "1"},] } ,
-    {id: "2", name: "Max", badges: [ { badge_name: "Most Likely to Sound an Airhorn", vote_count: "34", person_id: "2"},] } ,
-    {id: "3", name: "Hunter", badges: [ { badge_name: "Most Sardonic", vote_count: "4", person_id: "3"}, ] }
-    ]
+  for (var i = 0; i < bootObjects.length; i++){
+    var bootObjectsInTransit = {
+      "id": bootObjects[i].id,
+      "name": bootObjects[i].name,
+      "badges": bootObjects[i].badges
+    };
+    boots.push(bootObjectsInTransit);
   };
-  // Pass our data to the template
-  var theCompiledHtml = theTemplate(context);
-  // Add the compiled html to the page
+  var wrapper = {objects: boots};
+  var theCompiledHtml = theTemplate(wrapper);
   $('.boots-placeholder').html(theCompiledHtml);
-});
-}
+  nameListener();
+};
 
 
+
+
+// var renderHandlebarsBadges = function() {
+//   $(function(bootObjects) {
+//     console.log("renderHandlebarsBadges working")
+//   // Grab the template script
+//   var theTemplateScript = $("#badges-template").html();
+//   // Compile the template
+//   var theTemplate = Handlebars.compile(theTemplateScript);
+//   // Define our data object
+//   var badges = []
+//   var bootObjectsInTransit =
+//   {
+//     boots: [
+//     {id: "1", name: "Seba", badges: [ { badge_name: "Most Chilean", vote_count: "30", person_id: "1"},] } ,
+//     {id: "2", name: "Max", badges: [ { badge_name: "Most Likely to Sound an Airhorn", vote_count: "34", person_id: "2"},] } ,
+//     {id: "3", name: "Hunter", badges: [ { badge_name: "Most Sardonic", vote_count: "4", person_id: "3"}, ] }
+//     ]
+//   };
+//   // Pass our data to the template
+//   var theCompiledHtml = theTemplate(bootObjectsInTransit);
+//   // Add the compiled html to the page
+//   $('.boots-placeholder').html(theCompiledHtml);
+// });
+// }
 
 

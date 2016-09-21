@@ -7,17 +7,16 @@
   <div class="container">
 
     <script id="boots-template" type="text/x-handlebars-template">
-
-    {{#boots}}
-        <h2><a href="" class="name-link" id="3">{{name}}</a></h2>
-    {{/boots}}
+      {{#boots}}
+      <h2><a href="" class="name-link" id="3">{{name}}</a></h2>
+      {{/boots}}
     </script>
 
-<!--
-{{#badges}}
-<p>{{badge_name}} - {{vote_count}}</p>
-{{/badges}}
- -->
+    <script id="badges-template" type="text/x-handlebars-template">
+      {{#badges}}
+      <p>{{badge_name}} - {{vote_count}}</p>
+      {{/badges}}
+    </script>
 
     <div class="logo">
       <h1> SPA Badge </h1>
@@ -31,7 +30,6 @@
     <ul>
       <li><a href="#">Walker</a></li>
       <li><a href="sample-page.html">Sample Page (to see what the badges view should look like)</a></li>
-      {{thing}}
     </ul>
 
   </div>

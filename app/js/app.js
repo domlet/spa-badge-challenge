@@ -1,7 +1,6 @@
 $(document).ready(function(){
   getBoots();
   nameListener();
-  console.log("js working")
 });
 
 
@@ -9,31 +8,23 @@ $(document).ready(function(){
 
 // SO CLOSE!!
 var nameListener = function() {
-  console.log("hi");
   $('.boots-placeholder').on('click', 'a', function(event) {
     event.preventDefault()
     var id = parseInt(this.id);
     getBadges(id);
-    console.log(id);
-    console.log(this)
-
   })
 }
 
 var getBoots = function() {
-  console.log("getBoots working")
   var request = $.ajax({
     url: 'http://localhost:3000/boots',
     type: 'GET',
     crossDomain : true
   });
   request.done(function(response) {
-    console.log("in getBoots")
-    console.log(response)
     renderHandlebarsBoots(response);
   });
   request.fail(function(response) {
-    console.log("AJAX failure.")
   });
 }
 
@@ -56,8 +47,8 @@ var getBadges = function(id) {
 }
 
 var renderHandlebarsBoots = function(bootObjects) {
-    console.log("renderHandlebarsBoots working")
-    console.log(bootObjects)
+  console.log("renderHandlebarsBoots working")
+  console.log(bootObjects)
   // Grab the template script
   var theTemplateScript = $("#boots-template").html();
   // Compile the template
@@ -67,17 +58,21 @@ var renderHandlebarsBoots = function(bootObjects) {
   for (var i = 0; i < bootObjects.length; i++){
     var bootObjectsInTransit = {
       "id": bootObjects[i].id,
-      "name": bootObjects[i].name,
-      "badges": bootObjects[i].badges
+      "name": bootObjects[i].name
     };
     boots.push(bootObjectsInTransit);
+    console.log(bootObjectsInTransit.name)
   };
+  console.log(boots)
   var wrapper = {objects: boots};
-  var theCompiledHtml = theTemplate(wrapper);
-  $('.boots-placeholder').html(theCompiledHtml);
-  nameListener();
+  console.log(wrapper)
+//   // Pass our data to the template
+var theCompiledHtml = theTemplate(wrapper);
+//   // Add the compiled html to the page
+$('.boots-placeholder').html(theCompiledHtml);
+  console.log(theCompiledHtml)
+nameListener();
 };
-
 
 
 

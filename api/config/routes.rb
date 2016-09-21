@@ -4,7 +4,8 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'boots#index'
-  resources :boots
+  resources :boots, only: [:index, :show]
+  resources :badges, only: [:create, :update]
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

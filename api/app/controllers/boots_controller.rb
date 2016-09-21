@@ -2,9 +2,10 @@ class BootsController < ApplicationController #::API
 
   # GET BOOTS - show all boots
   def index
-      @boots = Boot.all
-      @badges = Badge.all
-      boots = []
+      @boots = Boot.all # get all the boots
+      @badges = Badge.all # get all the badges
+      boots = [] # empty array in prep for JSON
+      # Builds the JSON object including badges
       @boots.each do |boot|
         boot_hash = {}
         boot_hash = boot.as_json
@@ -17,10 +18,9 @@ class BootsController < ApplicationController #::API
 
   # SHOW BOOTS - show boot with ID 1, badges included
   def show
-    p "show"
+    # p "*" * 50
     boot = Boot.find(params[:id])
     @badges = boot.badges
-    # p "*" * 50
     p @badges
     render json: @badges
   end

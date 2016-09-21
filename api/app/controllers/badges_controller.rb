@@ -1,7 +1,7 @@
 class BadgesController < ApplicationController
-  # GET BADGES - create new badge, expects phrase and teacher_id as parameters
+  # GET BADGES - create new badge, expects parameters
   def create
-    @badge = Badge.new(phrase: params[:phrase], boot_id: params[:boot_id])
+    @badge = Badge.new(badge_name: params[:badge_name], vote_count: params[:vote_count], boot_id: params[:boot_id])
     if @badge.save
       render json: @badge
     else
@@ -12,8 +12,10 @@ class BadgesController < ApplicationController
   # SHOW BADGES - vote for a badge
   # Expects one param called "vote_type" whose value can be "up" or "down"
   def update
-    @badge = Badge.find(params[:id])
-    @badge.update(phrase: params[:phrase], boot_id: params[:boot_id])
+    p params
+    p "*" * 50
+    p @badge = Badge.find(params[:id])
+    p @badge.update_attributes(vote_count: params[:vote_count])
     render json: @badge
   end
 

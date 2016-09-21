@@ -8,30 +8,33 @@
 
     <script id="boots-template" type="text/x-handlebars-template">
       {{#objects}}
-      <h2><a href="" class="name-link" id="3">{{name}}</a></h2>
+      <h2><a href="#{{id}}"" class="name-link" id="{{id}}">{{name}}</a></h2>
       {{/objects}}
     </script>
 
     <script id="badges-template" type="text/x-handlebars-template">
-      {{#badges}}
-      <p>{{badge_name}} - {{vote_count}}</p>
-      {{/badges}}
+      {{#objects}}
+      <h2>{{badge_name}} - {{vote_count}} -
+      <a href="" class="vote-up" id="{{id}}">UP</a>
+      <a href="" class="vote-down" id="{{id}}">DOWN</a>
+      </h2>
+      {{/objects}}
     </script>
 
     <div class="logo">
-      <h1> SPA Badge </h1>
+      <h1>SPA Badge</h1>
     </div>
-    <h1> SF Boots </h1>
+    <h1> <a href="" id="home">SF Boots</a> </h1>
 
     <!--Your new content will be displayed in here-->
     <div class="boots-placeholder"></div>
     <div class="badges-placeholder"></div>
 
-    <ul>
+<!--     <ul>
       <li><a href="#">Walker</a></li>
       <li><a href="sample-page.html">Sample Page (to see what the badges view should look like)</a></li>
     </ul>
-
+ -->
   </div>
   <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>

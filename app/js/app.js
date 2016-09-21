@@ -3,9 +3,6 @@ $(document).ready(function(){
   nameListener();
 });
 
-
-// $(element).on('click', function () { /* do stuff */ });
-
 // SO CLOSE!!
 var nameListener = function() {
   $('.boots-placeholder').on('click', 'a', function(event) {
